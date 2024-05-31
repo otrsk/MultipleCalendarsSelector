@@ -78,8 +78,9 @@ function buildPopup() {
                     chrome.tabs.query(
                         { active: true, currentWindow: true },
                         function (tabs) {
-                            chrome.tabs.executeScript(tabs[0].id, {
-                                code: 'focusCalendars("' + presetId + '")',
+                            chrome.scripting.executeScript({
+                                target: {tabId: tabs[0].id},
+                                codes: ['focusCalendars("' + presetId + '")']
                             })
                         }
                     )
@@ -106,8 +107,9 @@ function buildPopup() {
         chrome.tabs.query(
             { active: true, currentWindow: true },
             function (tabs) {
-                chrome.tabs.executeScript(tabs[0].id, {
-                    code: 'showAllCalendars()',
+                chrome.scripting.executeScript({
+                    target: {tabId: tabs[0].id},
+                    codes: ['showAllCalendars()']
                 })
             }
         )
@@ -118,8 +120,9 @@ function buildPopup() {
         chrome.tabs.query(
             { active: true, currentWindow: true },
             function (tabs) {
-                chrome.tabs.executeScript(tabs[0].id, {
-                    code: 'hideAllCalendars()',
+                chrome.scripting.executeScript({
+                    target: {tabId: tabs[0].id},
+                    codes: ['hideAllCalendars()']
                 })
             }
         )
