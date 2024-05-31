@@ -1,6 +1,6 @@
 'use strict'
 
-let tracker
+// let tracker
 
 
 async function focusCalendars(presetId) {
@@ -29,20 +29,20 @@ async function focusCalendars(presetId) {
 
 
 async function hideAllCalendars() {
-    tracker.sendEvent('Main', 'Hiding done', '')
+    // tracker.sendEvent('Main', 'Hiding done', '')
     await refreshAllCalendars()
     setStateOnCalendars(allCalendars, false)
 }
 
 async function showAllCalendars() {
-    tracker.sendEvent('Main', 'Showing all done', '')
+    // tracker.sendEvent('Main', 'Showing all done', '')
     await refreshAllCalendars()
     setStateOnCalendars(allCalendars, true)
 }
 function main() {
-    tracker = getAnalyticsTracker()
-    tracker.sendAppView('PopupView')
-    tracker.sendEvent('Popup', 'Icon tapped', '')
+    // tracker = getAnalyticsTracker()
+    // tracker.sendAppView('PopupView')
+    // tracker.sendEvent('Popup', 'Icon tapped', '')
 
     // Open Google Calendar if not currenty active; only display the actual popup if active
     chrome.tabs.query(
@@ -52,7 +52,7 @@ function main() {
                 tabsActive[0].url &&
                 tabsActive[0].url.includes(googleCalendarUrl)
             ) {
-                tracker.sendEvent('Popup', 'Tapped on a Calendar tab', '')
+                // tracker.sendEvent('Popup', 'Tapped on a Calendar tab', '')
                 buildPopup()
             } else {
                 tracker.sendEvent(
@@ -68,20 +68,20 @@ function main() {
                                 tab.url &&
                                 tab.url.includes(googleCalendarUrl)
                             ) {
-                                tracker.sendEvent(
-                                    'Popup',
-                                    'Found open Calendar tab',
-                                    ''
-                                )
+                                // tracker.sendEvent(
+                                //     'Popup',
+                                //     'Found open Calendar tab',
+                                //     ''
+                                // )
                                 chrome.tabs.highlight({ tabs: tab.index })
                                 return
                             }
                         }
-                        tracker.sendEvent(
-                            'Popup',
-                            'Created new Calendar tab',
-                            ''
-                        )
+                        // tracker.sendEvent(
+                        //     'Popup',
+                        //     'Created new Calendar tab',
+                        //     ''
+                        // )
                         chrome.tabs.create({ url: googleCalendarUrl })
                     }
                 )
@@ -91,7 +91,7 @@ function main() {
 }
 
 function buildPopup() {
-    tracker.sendEvent('Popup', 'Started building', '')
+    // tracker.sendEvent('Popup', 'Started building', '')
 
     const presetSpan = document.getElementById('presetSpan')
 
@@ -107,11 +107,11 @@ function buildPopup() {
                 presetFocusButton.innerText = presets[presetId].name
                 presetFocusButton.className = 'popup'
                 presetFocusButton.onclick = function (element) {
-                    tracker.sendEvent(
-                        'Popup',
-                        'Button tapped',
-                        'focusCalendars'
-                    )
+                    // tracker.sendEvent(
+                    //     'Popup',
+                    //     'Button tapped',
+                    //     'focusCalendars'
+                    // )
                     chrome.tabs.query(
                         { active: true, currentWindow: true },
                         function (tabs) {
@@ -128,7 +128,7 @@ function buildPopup() {
         function (err) {
             const errorMessage =
                 "Couldn't load presets from storage for popup: " + err
-            tracker.sendEvent('Popup', 'Error', errorMessage)
+            // tracker.sendEvent('Popup', 'Error', errorMessage)
             console.log(errorMessage)
         }
     )
@@ -141,7 +141,7 @@ function buildPopup() {
     openOptionsButton.innerText = chrome.i18n.getMessage('extensionOptions')
 
     presetAllButton.onclick = function (element) {
-        tracker.sendEvent('Popup', 'Button tapped', 'showAllCalendars')
+        // tracker.sendEvent('Popup', 'Button tapped', 'showAllCalendars')
         chrome.tabs.query(
             { active: true, currentWindow: true },
             function (tabs) {
@@ -154,7 +154,7 @@ function buildPopup() {
     }
 
     presetNoneButton.onclick = function (element) {
-        tracker.sendEvent('Popup', 'Button tapped', 'hideAllCalendars')
+        // tracker.sendEvent('Popup', 'Button tapped', 'hideAllCalendars')
         chrome.tabs.query(
             { active: true, currentWindow: true },
             function (tabs) {
@@ -167,7 +167,7 @@ function buildPopup() {
     }
 
     openOptionsButton.onclick = function (element) {
-        tracker.sendEvent('Popup', 'Button tapped', 'showOptions')
+        // tracker.sendEvent('Popup', 'Button tapped', 'showOptions')
         chrome.tabs.create({
             url:
                 'chrome-extension://' + chrome.runtime.id + '/src/options.html',
