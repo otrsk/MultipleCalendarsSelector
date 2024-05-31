@@ -24,19 +24,16 @@
         "activeTab",
         "tabs",
         "declarativeContent",
-        "storage"
+        "storage",
+        "alarms",
+        "scripting"
     ],
     "host_permissions": [
         "https://www.google-analytics.com/"
       ],
     "options_page": "src/options.html",
     "background": {
-        "scripts": [
-            "libs/google-analytics-bundle.js",
-            "src/utils.js",
-            "src/background.js"
-        ],
-        "persistent": false
+        "service_worker": "src/background.js"
     },
     "content_scripts": [
         {
