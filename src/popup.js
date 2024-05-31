@@ -80,7 +80,8 @@ function buildPopup() {
                         function (tabs) {
                             chrome.scripting.executeScript({
                                 target: {tabId: tabs[0].id},
-                                codes: ['focusCalendars("' + presetId + '")']
+                                func:focusCalendars,
+                                args: [presetId]
                             })
                         }
                     )
@@ -109,7 +110,7 @@ function buildPopup() {
             function (tabs) {
                 chrome.scripting.executeScript({
                     target: {tabId: tabs[0].id},
-                    codes: ['showAllCalendars()']
+                    func:showAllCalendars
                 })
             }
         )
@@ -122,7 +123,7 @@ function buildPopup() {
             function (tabs) {
                 chrome.scripting.executeScript({
                     target: {tabId: tabs[0].id},
-                    codes: ['hideAllCalendars()']
+                    func:hideAllCalendars
                 })
             }
         )
