@@ -55,11 +55,11 @@ function main() {
                 // tracker.sendEvent('Popup', 'Tapped on a Calendar tab', '')
                 buildPopup()
             } else {
-                tracker.sendEvent(
-                    'Popup',
-                    'Tapped outside of a Calendar tab',
-                    ''
-                )
+                // tracker.sendEvent(
+                //     'Popup',
+                //     'Tapped outside of a Calendar tab',
+                //     ''
+                // )
                 chrome.tabs.query(
                     { active: false, currentWindow: true },
                     function (tabs) {
