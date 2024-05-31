@@ -2,6 +2,43 @@
 
 let tracker
 
+
+async function focusCalendars(presetId) {
+    // tracker.sendEvent('Main', 'Focusing done', '')
+    await refreshAllCalendars()
+    getPresetsFromStorage(
+        function (presets) {
+            const calendarJQObjects = calendarJQObjectsFromNames(
+                presets[presetId].calendars,
+                allCalendars
+            )
+            const calendarsToHide = [...allCalendars].filter(
+                (x) => !calendarJQObjects.includes(x)
+            )
+            setStateOnCalendars(calendarsToHide, false)
+            setStateOnCalendars(calendarJQObjects, true)
+        },
+        function (err) {
+            const errorMessage =
+                "Couldn't load presets from storage to focus: " + err
+            // tracker.sendEvent('Main', 'Error', errorMessage)
+            console.log(errorMessage)
+        }
+    )
+}
+
+
+async function hideAllCalendars() {
+    tracker.sendEvent('Main', 'Hiding done', '')
+    await refreshAllCalendars()
+    setStateOnCalendars(allCalendars, false)
+}
+
+async function showAllCalendars() {
+    tracker.sendEvent('Main', 'Showing all done', '')
+    await refreshAllCalendars()
+    setStateOnCalendars(allCalendars, true)
+}
 function main() {
     tracker = getAnalyticsTracker()
     tracker.sendAppView('PopupView')
