@@ -5,8 +5,6 @@ importScripts("utils.js")
 const currentPackageVersion = chrome.runtime.getManifest().version
 const storageIdForLastSeenPackageVersion = 'lastSeenPackageVersion'
 
-// let tracker
-
 function main() {
     chrome.runtime.onInstalled.addListener(function () {
         chrome.tabs.create({ url: googleCalendarUrl })
@@ -29,10 +27,6 @@ function main() {
         )
     })
 
-    // tracker = getAnalyticsTracker()
-    // tracker.sendAppView('BackgroundView')
-    // tracker.sendEvent('Background', 'Extension version', currentPackageVersion)
-
     checkForVersionUpgrade()
 }
 
@@ -51,11 +45,6 @@ function checkForVersionUpgrade() {
             const lastSeenPackageVersion =
                 data[storageIdForLastSeenPackageVersion]
             if (lastSeenPackageVersion !== currentPackageVersion) {
-                // tracker.sendEvent(
-                //     'Extension upgrade detected from-to',
-                //     lastSeenPackageVersion,
-                //     currentPackageVersion
-                // )
                 persistPackageVersion(currentPackageVersion)
             }
         }
