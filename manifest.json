@@ -25,7 +25,6 @@
         "tabs",
         "declarativeContent",
         "storage",
-        "alarms",
         "scripting"
     ],
     "options_page": "src/options.html",
