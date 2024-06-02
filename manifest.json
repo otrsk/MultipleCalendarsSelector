@@ -28,9 +28,6 @@
         "alarms",
         "scripting"
     ],
-    "host_permissions": [
-        "https://www.google-analytics.com/"
-      ],
     "options_page": "src/options.html",
     "background": {
         "service_worker": "src/background.js"
@@ -41,7 +38,6 @@
             "run_at": "document_end",
             "js": [
                 "libs/jquery-latest.min.js",
-                "libs/google-analytics-bundle.js",
                 "src/utils.js",
                 "src/main.js"
             ],
